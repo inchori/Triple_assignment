@@ -1,0 +1,29 @@
+package com.triple.assignment.controller;
+
+import com.triple.assignment.dto.CityCreateRequestDto;
+import com.triple.assignment.dto.CityCreateResponseDto;
+import com.triple.assignment.dto.CityGetOneResponseDto;
+import com.triple.assignment.service.CityService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/city")
+public class CityController {
+
+    private final CityService cityService;
+
+    @PostMapping
+    public CityCreateResponseDto createCity(@RequestBody @Valid CityCreateRequestDto cityCreateRequestDto) {
+        return cityService.create(cityCreateRequestDto);
+    }
+
+    @GetMapping("/{id}")
+    public CityGetOneResponseDto getCity(@PathVariable("id") Long id) {
+        return cityService.getOneCity(id);
+    }
+
+}
