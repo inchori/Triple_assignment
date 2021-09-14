@@ -4,11 +4,14 @@ import com.triple.assignment.dto.CityCreateRequestDto;
 import com.triple.assignment.dto.CityCreateResponseDto;
 import com.triple.assignment.dto.CityGetOneResponseDto;
 import com.triple.assignment.entity.City;
+import com.triple.assignment.exception.CityNotFoundException;
 import com.triple.assignment.repository.CityRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -26,7 +29,7 @@ public class CityService {
 
     @Transactional(readOnly = true)
     public CityGetOneResponseDto getOneCity(Long id) {
-//        cityRepository.findById(id).orElseThrow(NotFou)
-        return modelMapper.map(cityRepository.getById(id), CityGetOneResponseDto.class);
+        City findCity = cityRepository.findById(id).orElseThrow(CityNotFoundException::new);
+        return modelMapper.map(findCity, CityGetOneResponseDto.class);
     }
 }

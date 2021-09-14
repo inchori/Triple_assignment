@@ -75,7 +75,6 @@ class CityServiceTest {
                 .name(name)
                 .info(info)
                 .build();
-        cityRepository.save(city);
-        return city;
+        return cityRepository.save(city);
     }
 }

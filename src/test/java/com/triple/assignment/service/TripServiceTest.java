@@ -1,7 +1,8 @@
 package com.triple.assignment.service;
-import com.triple.assignment.dto.TripCreateRequestDto;
-import com.triple.assignment.dto.TripCreateResponseDto;
+import com.triple.assignment.dto.*;
+import com.triple.assignment.entity.City;
 import com.triple.assignment.entity.Trip;
+import com.triple.assignment.exception.TripIsNotFutureException;
 import com.triple.assignment.repository.CityRepository;
 import com.triple.assignment.repository.TripRepository;
 import com.triple.assignment.service.TripService;
@@ -21,9 +22,6 @@ class TripServiceTest {
     @Autowired
     private CityRepository cityRepository;
     @Autowired
-    private CityService cityService;
-
-    @Autowired
     private TripRepository tripRepository;
     @Autowired
     private TripService tripService;
@@ -31,6 +29,7 @@ class TripServiceTest {
     @BeforeEach
     public void setUp() {
         tripRepository.deleteAll();
+        cityRepository.deleteAll();
     }
 
     @Test
@@ -41,8 +40,9 @@ class TripServiceTest {
 
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("친구와 여행")
-                .tripStartDate(LocalDateTime.of(2021, 9, 13, 0, 0))
-                .tripEndDate(LocalDateTime.of(2021, 9, 14, 0, 0))
+                .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0))
+                .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .cityName("런던")
                 .build();
 
         //when
@@ -52,26 +52,71 @@ class TripServiceTest {
         assertEquals(result.getTripName(), trip.getName());
         assertEquals(result.getTripStartDate(), trip.getStartTripDate());
         assertEquals(result.getTripEndDate(), trip.getEndTripDate());
+        assertEquals(result.getCityInfo(), trip.getCity().getInfo());
+    }
+
+    @Test
+    @DisplayName("여행 등록 실패")
+    public void 여행_등록_실패(){
+        //given
+        TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                .tripName("친구와 여행")
+                .tripStartDate(LocalDateTime.of(2021, 9, 13, 0, 0))
+                .tripEndDate(LocalDateTime.of(2021, 9, 14, 0, 0))
+                .cityName("런던")
+                .build();
+
+        //when
+        TripIsNotFutureException thrown = assertThrows(TripIsNotFutureException.class, () -> tripService.createTrip(tripCreateRequestDto));
+
+        //then
+        assertEquals("여행 시작은 미래 날짜만 가능합니다.", thrown.getMessage());
     }
 
     @Test
     @DisplayName("여행 하나 조회")
     public void 여행_하나_조회() {
         //given
+        Trip trip = createTrip();
+
+        TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                .tripName("친구와 여행")
+                .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0))
+                .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .cityName("런던")
+                .build();
+
+        TripCreateResponseDto savedTrip = tripService.createTrip(tripCreateRequestDto);
 
         //when
+        Long findTripId = savedTrip.getTripId();
 
         //then
+        TripGetOneResponseDto result = tripService.getOneTrip(findTripId);
+        assertEquals(result.getTripId(), savedTrip.getTripId());
+        assertEquals(result.getTripName(), savedTrip.getTripName());
+        assertEquals(result.getTripStartDate(), savedTrip.getTripStartDate());
+        assertEquals(result.getTripEndDate(), savedTrip.getTripEndDate());
     }
 
     public Trip createTrip() {
+        City city = createCity("런던", "영국의 수도");
         Trip trip = Trip.builder()
                 .name("친구와 여행")
-                .startTripDate(LocalDateTime.of(2021, 9, 13, 0, 0))
-                .endTripDate(LocalDateTime.of(2021, 9, 14, 0, 0))
+                .startTripDate(LocalDateTime.of(2022, 9, 13, 0, 0))
+                .endTripDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .city(city)
                 .build();
-
         tripRepository.save(trip);
         return trip;
+    }
+
+    public City createCity(String name, String info) {
+        City city = City.builder()
+                .name(name)
+                .info(info)
+                .registerDate(LocalDateTime.now())
+                .build();
+        return cityRepository.save(city);
     }
 }

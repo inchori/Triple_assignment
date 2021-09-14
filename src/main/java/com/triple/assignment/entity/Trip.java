@@ -38,7 +38,6 @@ public class Trip {
     private void setCity(City city) {
         this.city = city;
     }
-
     public static Trip createTrip(TripCreateRequestDto createRequestDto, City city) {
         Trip trip = Trip.builder()
                 .name(createRequestDto.getTripName())

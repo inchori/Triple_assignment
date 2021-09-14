@@ -17,7 +17,7 @@ public class CityController {
     private final CityService cityService;
 
     @PostMapping
-    public CityCreateResponseDto createCity(@RequestBody @Valid CityCreateRequestDto cityCreateRequestDto) {
+    public CityCreateResponseDto registerCity(@RequestBody @Valid CityCreateRequestDto cityCreateRequestDto) {
         return cityService.create(cityCreateRequestDto);
     }
 

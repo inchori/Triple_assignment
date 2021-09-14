@@ -1,11 +1,13 @@
 package com.triple.assignment.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,12 +19,15 @@ public class TripCreateRequestDto {
     @NotEmpty
     private String tripName;
 
-    @NotEmpty
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime tripStartDate;
 
-    @NotEmpty
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime tripEndDate;
 
-//    @NotEmpty
-//    private String cityName;
+    @NotEmpty
+    private String cityName;
+
 }
