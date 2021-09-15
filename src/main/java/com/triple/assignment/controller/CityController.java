@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +25,12 @@ public class CityController {
     @GetMapping("/{id}")
     public CityGetOneResponseDto getCity(@PathVariable("id") Long id) {
         return cityService.getOneCity(id);
+    }
+
+
+    @GetMapping("/list")
+    public List<CityGetOneResponseDto> getCityList() {
+        return cityService.getCities();
     }
 
 }

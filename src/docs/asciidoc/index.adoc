@@ -1,0 +1,24 @@
+= 도시, 여행 API
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[[resources-city]]
+== 도시
+
+[[reigster-city]]
+== 도시 등록
+operation::register-city[snippets='request-fields,http-request,response-fields,http-response']
+
+[[city-getOne]]
+== 도시 조회
+operation::city-getOne[snippets='path-parameters,http-request,http-response,response-headers,response-fields']
+

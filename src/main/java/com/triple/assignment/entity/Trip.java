@@ -35,16 +35,13 @@ public class Trip {
     @OneToOne(fetch = FetchType.LAZY)
     private City city;
 
-    private void setCity(City city) {
-        this.city = city;
-    }
     public static Trip createTrip(TripCreateRequestDto createRequestDto, City city) {
         Trip trip = Trip.builder()
                 .name(createRequestDto.getTripName())
                 .startTripDate(createRequestDto.getTripStartDate())
                 .endTripDate(createRequestDto.getTripEndDate())
+                .city(city)
                 .build();
-        trip.setCity(city);
         return trip;
     }
 }

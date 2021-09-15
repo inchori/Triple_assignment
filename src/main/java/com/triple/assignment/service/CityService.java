@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,4 +34,14 @@ public class CityService {
         City findCity = cityRepository.findById(id).orElseThrow(CityNotFoundException::new);
         return modelMapper.map(findCity, CityGetOneResponseDto.class);
     }
+
+
+    @Transactional(readOnly = true)
+    public List<CityGetOneResponseDto> getCities() {
+        List<City> tenCities = cityRepository.findTenCities();
+        return tenCities.stream()
+                .map(tenCity -> modelMapper.map(tenCity, CityGetOneResponseDto.class))
+                .collect(Collectors.toList());
+    }
+
 }
