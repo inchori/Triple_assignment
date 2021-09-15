@@ -42,7 +42,7 @@ spring:
 ```
 + `spring.datasource.username` and `spring.datasource.password` 본인의 MySQL 설정에 맞게 변경
 
-** 4. 빌드 & 실행**
+**4. 빌드 & 실행**
 ```bash
 ./gradlew build
 cd build/libs
