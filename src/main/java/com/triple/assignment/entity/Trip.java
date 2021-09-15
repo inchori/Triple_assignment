@@ -32,7 +32,7 @@ public class Trip {
     private LocalDateTime endTripDate;
 
     @JoinColumn(name = "city_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private City city;
 
     public static Trip createTrip(TripCreateRequestDto createRequestDto, City city) {

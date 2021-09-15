@@ -19,10 +19,13 @@ public class Date {
 
     private LocalDateTime oneDayMinus;
 
-    public Date(Long id, LocalDateTime now, LocalDateTime oneDayMinus) {
+    private LocalDateTime oneWeekMinus;
+
+    public Date(Long id, LocalDateTime now, LocalDateTime oneDayMinus, LocalDateTime oneWeekMinus) {
         this.id = id;
         this.now = now;
         this.oneDayMinus = oneDayMinus;
+        this.oneWeekMinus = oneWeekMinus;
     }
 
 }

@@ -19,19 +19,26 @@ public class CityRepositoryImpl implements CityCustomRepository {
         queryFactory = new JPAQueryFactory(em);
     }
 
-    Date date = new Date(1L, LocalDateTime.now(), LocalDateTime.now().minusDays(1L));
 
+    //select c.* from city c, trip t where c.trip_id = t.trip_id order by ;
     @Override
     public List<City> findTenCities() {
-        LocalDateTime nowSubOne = LocalDateTime.now().minusDays(1L);
-        LocalDateTime now = LocalDateTime.now();
-
-        return queryFactory.select(city)
+        Date date = new Date(1L, LocalDateTime.now(), LocalDateTime.now().minusDays(1), LocalDateTime.now().minusWeeks(1));
+        List<City> cities = queryFactory.select(city)
                 .from(city, trip)
                 .where(city.id.eq(trip.city.id))
-                .orderBy(trip.startTripDate.asc())
+                .orderBy(
+                        trip.startTripDate.before(date.getNow()).asc(),
+                        trip.startTripDate.asc(),
+                        city.registerDate.between(date.getOneDayMinus(), date.getNow()).desc(),
+                        city.getOneDate.between(date.getOneWeekMinus(), date.getNow()).desc())
                 .offset(0)
                 .limit(10)
                 .fetch();
+        for (City city1 : cities) {
+            System.out.println("city1 = " + city1);
+        }
+        return cities;
     }
+
 }

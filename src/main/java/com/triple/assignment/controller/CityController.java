@@ -3,6 +3,7 @@ package com.triple.assignment.controller;
 import com.triple.assignment.dto.CityCreateRequestDto;
 import com.triple.assignment.dto.CityCreateResponseDto;
 import com.triple.assignment.dto.CityGetOneResponseDto;
+import com.triple.assignment.dto.CityTripResponseDto;
 import com.triple.assignment.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class CityController {
 
 
     @GetMapping("/list")
-    public List<CityGetOneResponseDto> getCityList() {
+    public List<CityTripResponseDto> getCityList() {
         return cityService.getCities();
     }
 

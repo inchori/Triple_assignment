@@ -40,4 +40,5 @@ public class TripService {
         return modelMapper.map(findTrip, TripGetOneResponseDto.class);
     }
 
+
 }

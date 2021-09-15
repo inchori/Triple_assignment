@@ -38,8 +38,8 @@ public class City {
     @Column(name = "get_one_date")
     private LocalDateTime getOneDate;
 
-    @OneToOne(mappedBy = "city", cascade = CascadeType.ALL)
-    private Trip trip;
+//    @OneToOne(mappedBy = "city", fetch = FetchType.LAZY)
+//    private Trip trip;
 
     public static City createCity(CityCreateRequestDto cityCreateRequestDto) {
         City city = City.builder()

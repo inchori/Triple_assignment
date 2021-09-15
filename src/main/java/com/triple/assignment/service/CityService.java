@@ -3,6 +3,7 @@ package com.triple.assignment.service;
 import com.triple.assignment.dto.CityCreateRequestDto;
 import com.triple.assignment.dto.CityCreateResponseDto;
 import com.triple.assignment.dto.CityGetOneResponseDto;
+import com.triple.assignment.dto.CityTripResponseDto;
 import com.triple.assignment.entity.City;
 import com.triple.assignment.exception.CityNotFoundException;
 import com.triple.assignment.repository.CityRepository;
@@ -37,11 +38,12 @@ public class CityService {
 
 
     @Transactional(readOnly = true)
-    public List<CityGetOneResponseDto> getCities() {
+    public List<CityTripResponseDto> getCities() {
         List<City> tenCities = cityRepository.findTenCities();
         return tenCities.stream()
-                .map(tenCity -> modelMapper.map(tenCity, CityGetOneResponseDto.class))
+                .map(tenCity -> modelMapper.map(tenCity, CityTripResponseDto.class))
                 .collect(Collectors.toList());
     }
+
 
 }
