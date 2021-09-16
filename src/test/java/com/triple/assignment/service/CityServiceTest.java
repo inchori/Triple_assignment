@@ -1,17 +1,17 @@
 package com.triple.assignment.service;
 
-import com.triple.assignment.dto.CityCreateRequestDto;
-import com.triple.assignment.dto.CityCreateResponseDto;
-import com.triple.assignment.dto.CityGetOneResponseDto;
-import com.triple.assignment.entity.City;
-import com.triple.assignment.repository.CityRepository;
+import com.triple.assignment.service.city.domain.City;
+import com.triple.assignment.web.city.CityCreateRequestDto;
+import com.triple.assignment.web.city.CityCreateResponseDto;
+import com.triple.assignment.web.city.CityGetOneResponseDto;
+import com.triple.assignment.service.city.repository.CityRepository;
+import com.triple.assignment.service.city.CityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

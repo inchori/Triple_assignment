@@ -1,11 +1,13 @@
 package com.triple.assignment.service;
-import com.triple.assignment.dto.*;
-import com.triple.assignment.entity.City;
-import com.triple.assignment.entity.Trip;
-import com.triple.assignment.exception.TripIsNotFutureException;
-import com.triple.assignment.repository.CityRepository;
-import com.triple.assignment.repository.TripRepository;
-import com.triple.assignment.service.TripService;
+import com.triple.assignment.service.city.domain.City;
+import com.triple.assignment.service.city.repository.CityRepository;
+import com.triple.assignment.service.trip.domain.Trip;
+import com.triple.assignment.service.trip.exception.TripIsNotFutureException;
+import com.triple.assignment.service.trip.repository.TripRepository;
+import com.triple.assignment.service.trip.TripService;
+import com.triple.assignment.web.trip.TripCreateRequestDto;
+import com.triple.assignment.web.trip.TripCreateResponseDto;
+import com.triple.assignment.web.trip.TripGetOneResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -93,10 +95,12 @@ class TripServiceTest {
 
         //then
         TripGetOneResponseDto result = tripService.getOneTrip(findTripId);
+
         assertEquals(result.getTripId(), savedTrip.getTripId());
         assertEquals(result.getTripName(), savedTrip.getTripName());
         assertEquals(result.getTripStartDate(), savedTrip.getTripStartDate());
         assertEquals(result.getTripEndDate(), savedTrip.getTripEndDate());
+//        assertEquals(result.getCityInfo(), savedTrip.getCityInfo());
     }
 
     public Trip createTrip() {
