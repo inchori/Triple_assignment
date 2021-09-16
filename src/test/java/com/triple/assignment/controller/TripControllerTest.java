@@ -2,6 +2,7 @@ package com.triple.assignment.controller;
 
 import com.triple.assignment.dto.CityCreateRequestDto;
 import com.triple.assignment.dto.TripCreateRequestDto;
+import com.triple.assignment.dto.TripCreateResponseDto;
 import com.triple.assignment.repository.CityRepository;
 import com.triple.assignment.repository.TripRepository;
 import com.triple.assignment.service.CityService;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +21,8 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.headerWit
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -98,10 +102,34 @@ class TripControllerTest extends ApiDocsConfig {
                 .cityName("London")
                 .build();
 
-        tripService.createTrip(tripCreateRequestDto);
-        //when
+        TripCreateResponseDto tripCreateResponseDto = tripService.createTrip(tripCreateRequestDto);
 
-        //then
+        mvc.perform(RestDocumentationRequestBuilders.get("/api/trip/{id}", tripCreateResponseDto.getTripId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("tripId").exists())
+                .andExpect(jsonPath("tripName").exists())
+                .andExpect(jsonPath("tripStartDate").exists())
+                .andExpect(jsonPath("tripEndDate").exists())
+                .andExpect(jsonPath("cityInfo").exists())
+                .andDo(document("trip-getOne",
+                        pathParameters(
+                                parameterWithName("id").description("조회할 여행의 이름")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("Content Type")
+                        ),
+                        responseFields(
+                                fieldWithPath("tripId").description("조회된 여행의 고유 아이디"),
+                                fieldWithPath("tripName").description("조회된 여행 이름"),
+                                fieldWithPath("tripStartDate").description("조회된 여행 시작 날짜"),
+                                fieldWithPath("tripEndDate").description("조회된 여행 종료 날짜"),
+                                fieldWithPath("cityInfo").description("조회된 여행 도시 정보")
+                        )
+                ));
+
+
     }
 
 }

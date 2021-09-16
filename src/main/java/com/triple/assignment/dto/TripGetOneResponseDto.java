@@ -1,5 +1,6 @@
 package com.triple.assignment.dto;
 
+import com.triple.assignment.entity.Trip;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,4 +15,6 @@ public class TripGetOneResponseDto {
     private LocalDateTime tripStartDate;
 
     private LocalDateTime tripEndDate;
+
+    private String cityInfo;
 }

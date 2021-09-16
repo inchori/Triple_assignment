@@ -1,10 +1,12 @@
 package com.triple.assignment.dto;
 
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Data
+@Getter
 public class TripCreateResponseDto {
 
     private Long tripId;

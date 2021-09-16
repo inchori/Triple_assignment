@@ -24,21 +24,12 @@ public class CityRepositoryImpl implements CityCustomRepository {
     @Override
     public List<City> findTenCities() {
         Date date = new Date(1L, LocalDateTime.now(), LocalDateTime.now().minusDays(1), LocalDateTime.now().minusWeeks(1));
-        List<City> cities = queryFactory.select(city)
+        return queryFactory.select(city)
                 .from(city, trip)
-                .where(city.id.eq(trip.city.id))
-                .orderBy(
-                        trip.startTripDate.before(date.getNow()).asc(),
-                        trip.startTripDate.asc(),
-                        city.registerDate.between(date.getOneDayMinus(), date.getNow()).desc(),
-                        city.getOneDate.between(date.getOneWeekMinus(), date.getNow()).desc())
-                .offset(0)
-                .limit(10)
+                .innerJoin(city.trip, trip)
+                .fetchJoin()
+                .orderBy(trip.startTripDate.asc())
                 .fetch();
-        for (City city1 : cities) {
-            System.out.println("city1 = " + city1);
-        }
-        return cities;
     }
 
 }

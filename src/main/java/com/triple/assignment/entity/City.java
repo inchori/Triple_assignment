@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,8 +40,9 @@ public class City {
     @Column(name = "get_one_date")
     private LocalDateTime getOneDate;
 
-//    @OneToOne(mappedBy = "city", fetch = FetchType.LAZY)
-//    private Trip trip;
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
+    private List<Trip> trip = new ArrayList<>();
+
 
     public static City createCity(CityCreateRequestDto cityCreateRequestDto) {
         City city = City.builder()

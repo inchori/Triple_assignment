@@ -1,18 +1,21 @@
 package com.triple.assignment.dto;
 
-import lombok.AllArgsConstructor;
+import com.triple.assignment.entity.City;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 public class CityTripResponseDto {
 
     private Long cityId;
     private String cityName;
     private String cityInfo;
-    private TripGetOneResponseDto tripGetOneResponseDto;
+
+    public CityTripResponseDto(City city) {
+        this.cityId = city.getId();
+        this.cityName = city.getName();
+        this.cityInfo = city.getInfo();
+    }
 }

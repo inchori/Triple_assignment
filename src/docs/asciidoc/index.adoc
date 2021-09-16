@@ -22,3 +22,13 @@ operation::register-city[snippets='request-fields,http-request,response-fields,h
 == 도시 조회
 operation::city-getOne[snippets='path-parameters,http-request,http-response,response-headers,response-fields']
 
+[[resources-trip]]
+== 여행
+
+[[register-trip]]
+== 여행 등록
+operation::register-trip[snippets='request-fields,http-request,response-fields,http-response']
+
+[[trip-getOne]]
+== 여행 조회
+operation::trip-getOne[snippets='path-parameters,http-request,http-response,response-headers,response-fields']
