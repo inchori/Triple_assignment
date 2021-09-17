@@ -24,6 +24,7 @@ public class CityRepositoryImpl implements CityCustomRepository {
         return queryFactory.selectDistinct(city)
                 .from(city, trip)
                 .innerJoin(city.trip, trip)
+                .orderBy(trip.startTripDate.asc())
                 .fetchJoin()
                 .fetch();
     }

@@ -50,4 +50,5 @@ public class Trip {
         trip.setCity(city);
         return trip;
     }
+
 }

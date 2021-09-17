@@ -1,9 +1,12 @@
 package com.triple.assignment.web;
 
+import com.triple.assignment.service.city.CityService;
+import com.triple.assignment.service.city.domain.City;
+import com.triple.assignment.service.city.repository.CityRepository;
+import com.triple.assignment.service.trip.TripService;
 import com.triple.assignment.web.city.CityCreateRequestDto;
 import com.triple.assignment.web.city.CityCreateResponseDto;
-import com.triple.assignment.service.city.repository.CityRepository;
-import com.triple.assignment.service.city.CityService;
+import com.triple.assignment.web.trip.TripCreateRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+
+import java.time.LocalDateTime;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
@@ -30,6 +35,9 @@ class CityControllerTest extends ApiDocsConfig {
 
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private TripService tripService;
 
     @BeforeEach
     public void setUp() {
@@ -99,5 +107,74 @@ class CityControllerTest extends ApiDocsConfig {
                                 fieldWithPath("cityInfo").description("조회한 도시 정보")
                         )
                 ));
+    }
+
+    @Test
+    @DisplayName("도시 리스트 조회")
+    public void 도시_리스트_조회() throws Exception {
+        //given
+        City city1 = createCity("런던", "영국의 수도");
+        City city2 = createCity("서울", "대한민국의 수도");
+        City city3 = createCity("워싱턴 D.C", "미국의 수도");
+
+        //when
+
+        for (int i = 0; i < 4; i++) {
+            TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                    .tripName("친구와 여행")
+                    .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0).plusDays(i))
+                    .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0).plusDays(i))
+                    .cityName(city1.getName())
+                    .build();
+            tripService.createTrip(tripCreateRequestDto);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                    .tripName("친구와 여행")
+                    .tripStartDate(LocalDateTime.of(2022, 10, 13, 0, 0).plusDays(i))
+                    .tripEndDate(LocalDateTime.of(2022, 10, 14, 0, 0).plusDays(i))
+                    .cityName(city2.getName())
+                    .build();
+            tripService.createTrip(tripCreateRequestDto);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                    .tripName("혼자 여행")
+                    .tripStartDate(LocalDateTime.of(2022, 11, 13, 0, 0).plusDays(i))
+                    .tripEndDate(LocalDateTime.of(2022, 11, 14, 0, 0).plusDays(i))
+                    .cityName(city3.getName())
+                    .build();
+            tripService.createTrip(tripCreateRequestDto);
+        }
+
+        //then
+        mvc.perform(RestDocumentationRequestBuilders.get("/api/city/list")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("city-list",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("Content_Type")
+                        ),
+                        responseFields(
+                                fieldWithPath("cities").description("조회한 도시 리스트들"),
+                                fieldWithPath("cities[].cityId").description("조회한 도시 리스트의 도시 고유 아이디"),
+                                fieldWithPath("cities[].cityName").description("조회한 도시 리스트의 도시 이름"),
+                                fieldWithPath("cities[].cityInfo").description("조회한 도시 리스트의 도시 정보"),
+                                fieldWithPath("cities[].tripName").description("조회한 도시 리스트의 여행 이름"),
+                                fieldWithPath("cities[].tripStartDate").description("조회한 도시 리스트의 여행 시작 날짜"),
+                                fieldWithPath("cities[].tripEndDate").description("조회한 도시 리스트의 여행 종료 날짜")
+                        )
+                ));
+    }
+
+    public City createCity(String name, String info) {
+        City city = City.builder()
+                .name(name)
+                .info(info)
+                .build();
+        return cityRepository.save(city);
     }
 }

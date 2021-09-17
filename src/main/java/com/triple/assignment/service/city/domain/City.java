@@ -32,7 +32,6 @@ public class City {
     private String info;
 
     @Column(name = "register_date")
-    @CreatedDate
     private LocalDateTime registerDate;
 
     @Column(name = "get_one_date")
@@ -53,4 +52,6 @@ public class City {
                 .build();
         return city;
     }
+
+
 }

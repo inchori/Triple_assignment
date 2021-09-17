@@ -1,6 +1,7 @@
 package com.triple.assignment.service.city;
 
 import com.triple.assignment.service.city.domain.City;
+import com.triple.assignment.service.city.exception.CityExistedException;
 import com.triple.assignment.service.city.exception.CityNotFoundException;
 import com.triple.assignment.service.city.repository.CityRepository;
 import com.triple.assignment.service.trip.domain.Trip;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,9 @@ public class CityService {
     private final ModelMapper modelMapper;
 
     public CityCreateResponseDto create(CityCreateRequestDto cityCreateRequestDto) {
+        if (cityRepository.findByName(cityCreateRequestDto.getCityName()).isPresent()) {
+            throw new CityExistedException();
+        }
         City savedCity = cityRepository.save(City.createCity(cityCreateRequestDto));
         return modelMapper.map(savedCity, CityCreateResponseDto.class);
     }
@@ -40,28 +45,26 @@ public class CityService {
     public CityTripResponseDto getCities() {
 
         List<City> cities = cityRepository.findTenCities();
+//        cities.sort((o1, o2) -> o1.getRegisterDate().compareTo(LocalDateTime.now().minusDays(1)));
+//        cities.sort((o1, o2) -> o1.getGetOneDate().compareTo(LocalDateTime.now().minusWeeks(1)));
         List<Trip> trip = new ArrayList<>();
         for (City city : cities) {
             if (city.getTrip() != null) trip.addAll(city.getTrip());
         }
 
-//        trip.addAll(cities.stream().filter(city -> Objects.nonNull(city.getTrip()))
-//                .map(City::getTrip).flatMap(trips -> ).collect(Collectors.toList()));
-
         List<Trip> tripPaging = trip.stream().limit(10).collect(Collectors.toList());
 
-        CityTripResponseDto cityTripResponseDto = new CityTripResponseDto();
-        List<CityTripGetOneResponseDto> cityTripGetOneResponseDto = new ArrayList<>();
+
+        List<CityTripGetOneResponseDto> cityTripGetOneResponseList = new ArrayList<>();
 
         for (Trip tripPage : tripPaging) {
-            cityTripGetOneResponseDto.add(new CityTripGetOneResponseDto(tripPage));
+            cityTripGetOneResponseList.add(new CityTripGetOneResponseDto(tripPage));
         }
 
-        cityTripResponseDto.setCities(cityTripGetOneResponseDto);
+        CityTripResponseDto cityTripResponseDto = CityTripResponseDto.builder()
+                .cities(cityTripGetOneResponseList)
+                .build();
 
-        for (CityTripGetOneResponseDto tripGetOneDto : cityTripGetOneResponseDto) {
-            System.out.println("tripGetOneDto.getCityName() = " + tripGetOneDto.getCityName());
-        }
 
         return cityTripResponseDto;
     }
