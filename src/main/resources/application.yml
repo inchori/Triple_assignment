@@ -1,15 +1,15 @@
 spring:
-#  datasource:
-#    #    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/city_travel?useSSL=false&serverTimezone=Asia/Seoul
-#    username: root
-#    password:
-
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/test
-    username: sa
+    #    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/city_travel?useSSL=false&serverTimezone=Asia/Seoul
+    username:
     password:
+
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:~/test
+#    username: sa
+#    password:
 
   jpa:
     hibernate:
