@@ -1,5 +1,9 @@
 package com.triple.assignment.service.city.repository;
 
+import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.triple.assignment.service.city.domain.City;
 
@@ -24,8 +28,15 @@ public class CityRepositoryImpl implements CityCustomRepository {
     public List<City> findTenCities() {
         return queryFactory.selectDistinct(city)
                 .from(city, trip)
-                .innerJoin(city.trip, trip)
-                .orderBy(trip.startTripDate.asc())
+                .leftJoin(city.trip, trip)
+//                        (new CaseBuilder()
+//                                .when(city.registerDate.after(LocalDateTime.now().minusDays(2)))
+//                                .then(city.registerDate)
+//                                .otherwise(trip.startTripDate.asc())).desc(),
+//                        (new CaseBuilder()
+//                                .when(city.getOneDate.after(LocalDateTime.now().minusWeeks(1).minusDays(1)))
+//                                .then(city.registerDate)
+//                                .otherwise(trip.startTripDate)).desc())
                 .fetchJoin()
                 .fetch();
     }

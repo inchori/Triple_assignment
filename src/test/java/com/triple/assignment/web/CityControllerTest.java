@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -132,23 +133,28 @@ class CityControllerTest extends ApiDocsConfig {
                 .build();
         CityCreateResponseDto cityCreateResponseDto3 = cityService.create(cityCreateRequestDto3);
 
+        CityCreateRequestDto cityCreateRequestDto4 = CityCreateRequestDto.builder()
+                .cityName("부산")
+                .cityInfo("대한민국 제 2의 도시")
+                .build();
+        CityCreateResponseDto cityCreateResponseDto4 = cityService.create(cityCreateRequestDto4);
         //when
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 9, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 9, 14).plusDays(i))
                     .cityName(cityCreateResponseDto1.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 10, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 10, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 10, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 10, 14).plusDays(i))
                     .cityName(cityCreateResponseDto2.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
@@ -157,8 +163,8 @@ class CityControllerTest extends ApiDocsConfig {
         for (int i = 0; i < 4; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("혼자 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 11, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 11, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 11, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 11, 14).plusDays(i))
                     .cityName(cityCreateResponseDto3.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
@@ -174,7 +180,8 @@ class CityControllerTest extends ApiDocsConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("Content_Type")
                         ),
                         responseFields(
-                                fieldWithPath("cities").description("조회한 도시 리스트들"),
+                                fieldWithPath("count").description("조회한 도시 리스트 사이즈"),
+                                fieldWithPath("cities").description("조회한 도시 리스트"),
                                 fieldWithPath("cities[].cityId").description("조회한 도시 리스트의 도시 고유 아이디"),
                                 fieldWithPath("cities[].cityName").description("조회한 도시 리스트의 도시 이름"),
                                 fieldWithPath("cities[].cityInfo").description("조회한 도시 리스트의 도시 정보"),

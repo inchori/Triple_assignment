@@ -1,12 +1,12 @@
 package com.triple.assignment.web;
 
+import com.triple.assignment.service.city.CityService;
+import com.triple.assignment.service.city.repository.CityRepository;
+import com.triple.assignment.service.trip.TripService;
+import com.triple.assignment.service.trip.repository.TripRepository;
 import com.triple.assignment.web.city.CityCreateRequestDto;
 import com.triple.assignment.web.trip.TripCreateRequestDto;
 import com.triple.assignment.web.trip.TripCreateResponseDto;
-import com.triple.assignment.service.city.repository.CityRepository;
-import com.triple.assignment.service.trip.repository.TripRepository;
-import com.triple.assignment.service.city.CityService;
-import com.triple.assignment.service.trip.TripService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
@@ -56,8 +56,8 @@ class TripControllerTest extends ApiDocsConfig {
     public void 여행_등록() throws Exception {
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("Trip with Family")
-                .tripStartDate(LocalDateTime.of(2021, 10, 5, 0, 0))
-                .tripEndDate(LocalDateTime.of(2021, 10, 30, 0, 0))
+                .tripStartDate(LocalDate.of(2021, 10, 5))
+                .tripEndDate(LocalDate.of(2021, 10, 30))
                 .cityName("London")
                 .build();
 
@@ -96,8 +96,8 @@ class TripControllerTest extends ApiDocsConfig {
         //given
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("Trip with Family")
-                .tripStartDate(LocalDateTime.of(2021, 10, 5, 0, 0))
-                .tripEndDate(LocalDateTime.of(2021, 10, 30, 0, 0))
+                .tripStartDate(LocalDate.of(2021, 10, 5))
+                .tripEndDate(LocalDate.of(2021, 10, 30))
                 .cityName("London")
                 .build();
 

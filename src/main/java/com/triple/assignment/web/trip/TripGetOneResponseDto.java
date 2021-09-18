@@ -2,6 +2,7 @@ package com.triple.assignment.web.trip;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -11,9 +12,9 @@ public class TripGetOneResponseDto {
 
     private String tripName;
 
-    private LocalDateTime tripStartDate;
+    private LocalDate tripStartDate;
 
-    private LocalDateTime tripEndDate;
+    private LocalDate tripEndDate;
 
     private String cityInfo;
 }

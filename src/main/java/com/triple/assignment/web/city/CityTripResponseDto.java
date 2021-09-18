@@ -9,6 +9,6 @@ import java.util.List;
 @Builder
 public class CityTripResponseDto {
 
+    private int count;
     private List<CityTripGetOneResponseDto> cities;
-
 }

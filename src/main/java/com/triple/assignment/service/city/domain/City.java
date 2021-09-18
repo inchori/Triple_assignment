@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class City {
     private String info;
 
     @Column(name = "register_date")
-    private LocalDateTime registerDate;
+    private LocalDate registerDate;
 
     @Column(name = "get_one_date")
     private LocalDateTime getOneDate;
@@ -48,8 +49,7 @@ public class City {
         City city = City.builder()
                 .name(cityCreateRequestDto.getCityName())
                 .info(cityCreateRequestDto.getCityInfo())
-                .registerDate(LocalDateTime.now())
-                .getOneDate(LocalDateTime.now())
+                .registerDate(LocalDate.now())
                 .build();
         return city;
     }

@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -26,7 +27,7 @@ public class TripService {
     private final ModelMapper modelMapper;
 
     public TripCreateResponseDto createTrip(TripCreateRequestDto createRequestDto) {
-        if (LocalDateTime.now().isAfter(createRequestDto.getTripStartDate())) {
+        if (LocalDate.now().isAfter(createRequestDto.getTripStartDate())) {
             throw new TripIsNotFutureException("여행 시작은 미래 날짜만 가능합니다.");
         }
         City city = cityRepository.findByName(createRequestDto.getCityName()).orElseThrow(CityNotFoundException::new);

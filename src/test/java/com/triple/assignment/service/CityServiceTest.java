@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -110,8 +111,8 @@ class CityServiceTest {
         for (int i = 0; i < 5; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 9, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 9, 14).plusDays(i))
                     .cityName(city1.getName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
@@ -120,8 +121,8 @@ class CityServiceTest {
         for (int i = 0; i < 5; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 4, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 4, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 4, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 4, 14).plusDays(i))
                     .cityName(city2.getName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
@@ -135,26 +136,59 @@ class CityServiceTest {
 
     @Test
     @DisplayName("도시 리스트 조회 시 10개만 나오는 조회")
-    public void test() {
+    public void 도시_리스트_조회_시_10개만_나오는_조회() {
         //given
         City city1 = createCity("런던", "영국의 수도");
 
         City city2 = createCity("서울", "대한민국의 수도");
-        for (int i = 0; i < 10; i++) {
+        City city3 = createCity("워싱턴", "미국의 수도");
+        for (int i = 0; i < 5; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 9, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 9, 14).plusDays(i))
                     .cityName(city1.getName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
-                    .tripStartDate(LocalDateTime.of(2022, 4, 13, 0, 0).plusDays(i))
-                    .tripEndDate(LocalDateTime.of(2022, 4, 14, 0, 0).plusDays(i))
+                    .tripStartDate(LocalDate.of(2022, 4, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 4, 14).plusDays(i))
+                    .cityName(city2.getName())
+                    .build();
+            tripService.createTrip(tripCreateRequestDto);
+        }
+        //when
+        CityTripResponseDto cities = cityService.getCities();
+        //then
+        assertEquals(cities.getCities().size(), 10);
+    }
+
+    @Test
+    @DisplayName("여행 일정 없는 도시도 조회되는지 조회")
+    public void test() throws Exception {
+        City city1 = createCity("런던", "영국의 수도");
+
+        City city2 = createCity("서울", "대한민국의 수도");
+        City city3 = createCity("워싱턴", "미국의 수도");
+        for (int i = 0; i < 5; i++) {
+            TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                    .tripName("친구와 여행")
+                    .tripStartDate(LocalDate.of(2022, 9, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 9, 14).plusDays(i))
+                    .cityName(city1.getName())
+                    .build();
+            tripService.createTrip(tripCreateRequestDto);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
+                    .tripName("친구와 여행")
+                    .tripStartDate(LocalDate.of(2022, 4, 13).plusDays(i))
+                    .tripEndDate(LocalDate.of(2022, 4, 14).plusDays(i))
                     .cityName(city2.getName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
@@ -169,6 +203,8 @@ class CityServiceTest {
         City city = City.builder()
                 .name(name)
                 .info(info)
+                .registerDate(LocalDate.now())
+                .getOneDate(LocalDateTime.now())
                 .build();
         return cityRepository.save(city);
     }

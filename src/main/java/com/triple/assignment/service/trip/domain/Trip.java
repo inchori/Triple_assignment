@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,10 +28,10 @@ public class Trip {
     private String name;
 
     @Column(name = "start_trip_time")
-    private LocalDateTime startTripDate;
+    private LocalDate startTripDate;
 
     @Column(name = "end_trip_time")
-    private LocalDateTime endTripDate;
+    private LocalDate endTripDate;
 
     @JoinColumn(name = "city_id")
     @ManyToOne(fetch = FetchType.LAZY)

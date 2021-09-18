@@ -2,6 +2,7 @@ package com.triple.assignment.web;
 
 public enum StatusEnum {
     OK(200, "OK"),
+    IS_CREATED(201, "IS_CREATED"),
     BAD_REQUEST(400, "BAD_REQUEST"),
     NOT_FOUND(404, "NOT_FOUND"),
     INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR");

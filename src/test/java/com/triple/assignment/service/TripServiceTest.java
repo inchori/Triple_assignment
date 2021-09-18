@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,8 +43,8 @@ class TripServiceTest {
 
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("친구와 여행")
-                .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0))
-                .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .tripStartDate(LocalDate.of(2022, 9, 13))
+                .tripEndDate(LocalDate.of(2022, 9, 14))
                 .cityName("런던")
                 .build();
 
@@ -63,8 +64,8 @@ class TripServiceTest {
         //given
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("친구와 여행")
-                .tripStartDate(LocalDateTime.of(2021, 9, 13, 0, 0))
-                .tripEndDate(LocalDateTime.of(2021, 9, 14, 0, 0))
+                .tripStartDate(LocalDate.of(2021, 9, 13))
+                .tripEndDate(LocalDate.of(2021, 9, 14))
                 .cityName("런던")
                 .build();
 
@@ -83,8 +84,8 @@ class TripServiceTest {
 
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                 .tripName("친구와 여행")
-                .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0))
-                .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .tripStartDate(LocalDate.of(2022, 9, 13))
+                .tripEndDate(LocalDate.of(2022, 9, 13))
                 .cityName("런던")
                 .build();
 
@@ -107,8 +108,8 @@ class TripServiceTest {
         City city = createCity("런던", "영국의 수도");
         Trip trip = Trip.builder()
                 .name("친구와 여행")
-                .startTripDate(LocalDateTime.of(2022, 9, 13, 0, 0))
-                .endTripDate(LocalDateTime.of(2022, 9, 14, 0, 0))
+                .startTripDate(LocalDate.of(2022, 9, 13))
+                .endTripDate(LocalDate.of(2022, 9, 14))
                 .city(city)
                 .build();
         tripRepository.save(trip);
@@ -119,7 +120,7 @@ class TripServiceTest {
         City city = City.builder()
                 .name(name)
                 .info(info)
-                .registerDate(LocalDateTime.now())
+                .registerDate(LocalDate.now())
                 .build();
         return cityRepository.save(city);
     }
