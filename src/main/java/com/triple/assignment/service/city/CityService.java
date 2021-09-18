@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,8 +51,8 @@ public class CityService {
             if (city.getTrip() != null) trip.addAll(city.getTrip());
         }
 
-        List<Trip> tripPaging = trip.stream().limit(10).collect(Collectors.toList());
 
+        List<Trip> tripPaging = trip.stream().limit(10).collect(Collectors.toList());
 
         List<CityTripGetOneResponseDto> cityTripGetOneResponseList = new ArrayList<>();
 
@@ -64,7 +63,6 @@ public class CityService {
         CityTripResponseDto cityTripResponseDto = CityTripResponseDto.builder()
                 .cities(cityTripGetOneResponseList)
                 .build();
-
 
         return cityTripResponseDto;
     }

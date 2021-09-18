@@ -11,6 +11,8 @@ public class CityTripGetOneResponseDto {
     private Long cityId;
     private String cityName;
     private String cityInfo;
+    private LocalDateTime cityRegisteredDate;
+    private LocalDateTime cityGetOneDate;
 
     private String tripName;
     private LocalDateTime tripStartDate;
@@ -20,6 +22,8 @@ public class CityTripGetOneResponseDto {
         this.cityId = trip.getCity().getId();
         this.cityName = trip.getCity().getName();
         this.cityInfo = trip.getCity().getInfo();
+        this.cityRegisteredDate = trip.getCity().getRegisterDate();
+        this.cityGetOneDate = trip.getCity().getGetOneDate();
         this.tripName = trip.getName();
         this.tripStartDate = trip.getStartTripDate();
         this.tripEndDate = trip.getEndTripDate();

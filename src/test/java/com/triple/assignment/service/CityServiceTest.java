@@ -61,7 +61,7 @@ class CityServiceTest {
     }
 
     @Test
-    @DisplayName("도시 중복 등록 실패")
+    @DisplayName("예외 처리: 도시 중복 등록 실패")
     public void 도시_중복_등록_실패() {
         //given
 

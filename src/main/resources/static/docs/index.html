@@ -718,13 +718,15 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 2181
+Content-Length: 3281
 
 {
   "cities" : [ {
     "cityId" : 4,
     "cityName" : "런던",
     "cityInfo" : "영국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.760167",
+    "cityGetOneDate" : "2021-09-18T00:58:30.760191",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-09-13T00:00:00",
     "tripEndDate" : "2022-09-14T00:00:00"
@@ -732,6 +734,8 @@ Content-Length: 2181
     "cityId" : 4,
     "cityName" : "런던",
     "cityInfo" : "영국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.760167",
+    "cityGetOneDate" : "2021-09-18T00:58:30.760191",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-09-14T00:00:00",
     "tripEndDate" : "2022-09-15T00:00:00"
@@ -739,6 +743,8 @@ Content-Length: 2181
     "cityId" : 4,
     "cityName" : "런던",
     "cityInfo" : "영국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.760167",
+    "cityGetOneDate" : "2021-09-18T00:58:30.760191",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-09-15T00:00:00",
     "tripEndDate" : "2022-09-16T00:00:00"
@@ -746,6 +752,8 @@ Content-Length: 2181
     "cityId" : 4,
     "cityName" : "런던",
     "cityInfo" : "영국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.760167",
+    "cityGetOneDate" : "2021-09-18T00:58:30.760191",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-09-16T00:00:00",
     "tripEndDate" : "2022-09-17T00:00:00"
@@ -753,6 +761,8 @@ Content-Length: 2181
     "cityId" : 5,
     "cityName" : "서울",
     "cityInfo" : "대한민국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.762379",
+    "cityGetOneDate" : "2021-09-18T00:58:30.762392",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-10-13T00:00:00",
     "tripEndDate" : "2022-10-14T00:00:00"
@@ -760,6 +770,8 @@ Content-Length: 2181
     "cityId" : 5,
     "cityName" : "서울",
     "cityInfo" : "대한민국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.762379",
+    "cityGetOneDate" : "2021-09-18T00:58:30.762392",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-10-14T00:00:00",
     "tripEndDate" : "2022-10-15T00:00:00"
@@ -767,6 +779,8 @@ Content-Length: 2181
     "cityId" : 5,
     "cityName" : "서울",
     "cityInfo" : "대한민국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.762379",
+    "cityGetOneDate" : "2021-09-18T00:58:30.762392",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-10-15T00:00:00",
     "tripEndDate" : "2022-10-16T00:00:00"
@@ -774,6 +788,8 @@ Content-Length: 2181
     "cityId" : 5,
     "cityName" : "서울",
     "cityInfo" : "대한민국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.762379",
+    "cityGetOneDate" : "2021-09-18T00:58:30.762392",
     "tripName" : "친구와 여행",
     "tripStartDate" : "2022-10-16T00:00:00",
     "tripEndDate" : "2022-10-17T00:00:00"
@@ -781,6 +797,8 @@ Content-Length: 2181
     "cityId" : 6,
     "cityName" : "워싱턴 D.C",
     "cityInfo" : "미국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.763997",
+    "cityGetOneDate" : "2021-09-18T00:58:30.764008",
     "tripName" : "혼자 여행",
     "tripStartDate" : "2022-11-13T00:00:00",
     "tripEndDate" : "2022-11-14T00:00:00"
@@ -788,6 +806,8 @@ Content-Length: 2181
     "cityId" : 6,
     "cityName" : "워싱턴 D.C",
     "cityInfo" : "미국의 수도",
+    "cityRegisteredDate" : "2021-09-18T00:58:30.763997",
+    "cityGetOneDate" : "2021-09-18T00:58:30.764008",
     "tripName" : "혼자 여행",
     "tripStartDate" : "2022-11-14T00:00:00",
     "tripEndDate" : "2022-11-15T00:00:00"
@@ -852,6 +872,16 @@ Content-Length: 2181
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cities[].cityInfo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">조회한 도시 리스트의 도시 정보</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cities[].cityRegisteredDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회한 도시 리스트의 도시 등록 시간</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cities[].cityGetOneDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회한 도시 리스트의 조회 시간</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>cities[].tripName</code></p></td>

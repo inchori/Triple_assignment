@@ -1,11 +1,8 @@
 package com.triple.assignment.web.city;
 
-import com.triple.assignment.web.city.CityCreateRequestDto;
-import com.triple.assignment.web.city.CityCreateResponseDto;
-import com.triple.assignment.web.city.CityGetOneResponseDto;
-import com.triple.assignment.web.city.CityTripResponseDto;
 import com.triple.assignment.service.city.CityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

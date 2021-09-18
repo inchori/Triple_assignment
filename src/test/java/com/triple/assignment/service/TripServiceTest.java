@@ -58,7 +58,7 @@ class TripServiceTest {
     }
 
     @Test
-    @DisplayName("여행 등록 실패")
+    @DisplayName("예외 처리: 여행 등록 실패")
     public void 여행_등록_실패(){
         //given
         TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()

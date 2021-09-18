@@ -2,12 +2,14 @@
 
 트리플 과제 테스트 API based on Spring Boot, JPA Hibernate ORM with MySQL, QueryDSL, Spring REST DOCS
 
-## Requirements
+## Requirements & Environment
 1. Java - OpenJDK 11.x.x
 2. Spring - 2.4.x
 3. Gradle - 6.9.x
 4. MySQL - 8.0.xx
 5. ORM - JPA Hibernate
+6. OS - MacOS 10.15.x
+7. IDE - IntelliJ IDEA
 
 ## Installations
 

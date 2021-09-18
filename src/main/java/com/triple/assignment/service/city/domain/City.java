@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,6 +49,7 @@ public class City {
                 .name(cityCreateRequestDto.getCityName())
                 .info(cityCreateRequestDto.getCityInfo())
                 .registerDate(LocalDateTime.now())
+                .getOneDate(LocalDateTime.now())
                 .build();
         return city;
     }

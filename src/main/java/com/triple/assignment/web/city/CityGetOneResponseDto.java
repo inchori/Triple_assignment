@@ -10,4 +10,5 @@ public class CityGetOneResponseDto {
     private String cityName;
 
     private String cityInfo;
+
 }

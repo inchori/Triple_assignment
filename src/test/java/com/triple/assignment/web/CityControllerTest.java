@@ -113,9 +113,24 @@ class CityControllerTest extends ApiDocsConfig {
     @DisplayName("도시 리스트 조회")
     public void 도시_리스트_조회() throws Exception {
         //given
-        City city1 = createCity("런던", "영국의 수도");
-        City city2 = createCity("서울", "대한민국의 수도");
-        City city3 = createCity("워싱턴 D.C", "미국의 수도");
+
+        CityCreateRequestDto cityCreateRequestDto = CityCreateRequestDto.builder()
+                .cityName("런던")
+                .cityInfo("영국의 수도")
+                .build();
+        CityCreateResponseDto cityCreateResponseDto1 = cityService.create(cityCreateRequestDto);
+
+        CityCreateRequestDto cityCreateRequestDto2 = CityCreateRequestDto.builder()
+                .cityName("서울")
+                .cityInfo("대한민국의 수도")
+                .build();
+        CityCreateResponseDto cityCreateResponseDto2 = cityService.create(cityCreateRequestDto2);
+
+        CityCreateRequestDto cityCreateRequestDto3 = CityCreateRequestDto.builder()
+                .cityName("워싱턴 D.C")
+                .cityInfo("미국의 수도")
+                .build();
+        CityCreateResponseDto cityCreateResponseDto3 = cityService.create(cityCreateRequestDto3);
 
         //when
 
@@ -124,7 +139,7 @@ class CityControllerTest extends ApiDocsConfig {
                     .tripName("친구와 여행")
                     .tripStartDate(LocalDateTime.of(2022, 9, 13, 0, 0).plusDays(i))
                     .tripEndDate(LocalDateTime.of(2022, 9, 14, 0, 0).plusDays(i))
-                    .cityName(city1.getName())
+                    .cityName(cityCreateResponseDto1.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
         }
@@ -134,7 +149,7 @@ class CityControllerTest extends ApiDocsConfig {
                     .tripName("친구와 여행")
                     .tripStartDate(LocalDateTime.of(2022, 10, 13, 0, 0).plusDays(i))
                     .tripEndDate(LocalDateTime.of(2022, 10, 14, 0, 0).plusDays(i))
-                    .cityName(city2.getName())
+                    .cityName(cityCreateResponseDto2.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
         }
@@ -144,7 +159,7 @@ class CityControllerTest extends ApiDocsConfig {
                     .tripName("혼자 여행")
                     .tripStartDate(LocalDateTime.of(2022, 11, 13, 0, 0).plusDays(i))
                     .tripEndDate(LocalDateTime.of(2022, 11, 14, 0, 0).plusDays(i))
-                    .cityName(city3.getName())
+                    .cityName(cityCreateResponseDto3.getCityName())
                     .build();
             tripService.createTrip(tripCreateRequestDto);
         }
@@ -163,6 +178,8 @@ class CityControllerTest extends ApiDocsConfig {
                                 fieldWithPath("cities[].cityId").description("조회한 도시 리스트의 도시 고유 아이디"),
                                 fieldWithPath("cities[].cityName").description("조회한 도시 리스트의 도시 이름"),
                                 fieldWithPath("cities[].cityInfo").description("조회한 도시 리스트의 도시 정보"),
+                                fieldWithPath("cities[].cityRegisteredDate").description("조회한 도시 리스트의 도시 등록 시간"),
+                                fieldWithPath("cities[].cityGetOneDate").description("조회한 도시 리스트의 조회 시간"),
                                 fieldWithPath("cities[].tripName").description("조회한 도시 리스트의 여행 이름"),
                                 fieldWithPath("cities[].tripStartDate").description("조회한 도시 리스트의 여행 시작 날짜"),
                                 fieldWithPath("cities[].tripEndDate").description("조회한 도시 리스트의 여행 종료 날짜")
