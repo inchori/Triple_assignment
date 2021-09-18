@@ -1,14 +1,9 @@
 package com.triple.assignment.service.city.repository;
 
-import com.querydsl.core.types.OrderSpecifier;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.*;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.triple.assignment.service.city.domain.City;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.triple.assignment.service.city.domain.QCity.city;

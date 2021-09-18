@@ -2,21 +2,20 @@ package com.triple.assignment.service.trip;
 
 import com.triple.assignment.service.city.domain.City;
 import com.triple.assignment.service.city.exception.CityNotFoundException;
+import com.triple.assignment.service.city.repository.CityRepository;
 import com.triple.assignment.service.trip.domain.Trip;
 import com.triple.assignment.service.trip.exception.TripIsNotFutureException;
+import com.triple.assignment.service.trip.exception.TripNotFoundException;
+import com.triple.assignment.service.trip.repository.TripRepository;
 import com.triple.assignment.web.trip.TripCreateRequestDto;
 import com.triple.assignment.web.trip.TripCreateResponseDto;
 import com.triple.assignment.web.trip.TripGetOneResponseDto;
-import com.triple.assignment.service.trip.exception.TripNotFoundException;
-import com.triple.assignment.service.city.repository.CityRepository;
-import com.triple.assignment.service.trip.repository.TripRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 @Transactional

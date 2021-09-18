@@ -1,10 +1,11 @@
 package com.triple.assignment.service;
+
 import com.triple.assignment.service.city.domain.City;
 import com.triple.assignment.service.city.repository.CityRepository;
+import com.triple.assignment.service.trip.TripService;
 import com.triple.assignment.service.trip.domain.Trip;
 import com.triple.assignment.service.trip.exception.TripIsNotFutureException;
 import com.triple.assignment.service.trip.repository.TripRepository;
-import com.triple.assignment.service.trip.TripService;
 import com.triple.assignment.web.trip.TripCreateRequestDto;
 import com.triple.assignment.web.trip.TripCreateResponseDto;
 import com.triple.assignment.web.trip.TripGetOneResponseDto;
@@ -15,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class TripServiceTest {

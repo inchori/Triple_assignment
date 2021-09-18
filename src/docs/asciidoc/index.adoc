@@ -16,6 +16,8 @@ endif::[]
 
 [[reigster-city]]
 == 도시 등록
+(도시를 등록할 때, 조회 시간은 현재 날짜를 등록합니다.)
+
 operation::register-city[snippets='request-fields,http-request,response-fields,http-response']
 
 [[city-getOne]]

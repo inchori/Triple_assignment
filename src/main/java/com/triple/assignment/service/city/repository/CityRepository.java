@@ -3,7 +3,6 @@ package com.triple.assignment.service.city.repository;
 import com.triple.assignment.service.city.domain.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 

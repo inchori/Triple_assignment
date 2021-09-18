@@ -1,6 +1,6 @@
 # Triple_assignment
 
-트리플 과제 테스트 API based on Spring Boot, JPA Hibernate ORM with MySQL, QueryDSL, Spring REST DOCS
+트리플 과제2 도시 조회 API based on Spring Boot, JPA Hibernate ORM with MySQL, QueryDSL, Spring REST DOCS
 
 ## Requirements & Environment
 1. Java - OpenJDK 11.x.x
@@ -28,7 +28,7 @@ create database city_travel
 ```
 spring:
   datasource:
-    #    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/city_travel?useSSL=false&serverTimezone=Asia/Seoul
     username: 
     password:

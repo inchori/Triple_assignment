@@ -1,11 +1,11 @@
 package com.triple.assignment.service.city.domain;
+
 import com.triple.assignment.service.trip.domain.Trip;
 import com.triple.assignment.web.city.CityCreateRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -42,7 +42,7 @@ public class City {
         this.getOneDate = getOneDate;
     }
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "city", cascade = CascadeType.REMOVE)
     private final List<Trip> trip = new ArrayList<>();
 
     public static City createCity(CityCreateRequestDto cityCreateRequestDto) {

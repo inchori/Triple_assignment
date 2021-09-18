@@ -1,6 +1,5 @@
 package com.triple.assignment.web;
 
-import com.triple.assignment.web.city.CityCreateResponseDto;
 import lombok.Data;
 
 @Data

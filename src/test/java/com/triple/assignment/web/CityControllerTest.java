@@ -1,7 +1,6 @@
 package com.triple.assignment.web;
 
 import com.triple.assignment.service.city.CityService;
-import com.triple.assignment.service.city.domain.City;
 import com.triple.assignment.service.city.repository.CityRepository;
 import com.triple.assignment.service.trip.TripService;
 import com.triple.assignment.web.city.CityCreateRequestDto;
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
