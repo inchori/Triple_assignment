@@ -168,12 +168,13 @@ class CityServiceTest {
     }
 
     @Test
-    @DisplayName("여행 일정 없는 도시도 조회되는지 조회")
-    public void test() throws Exception {
+    @DisplayName("여행 일정 없는 도시 조회")
+    public void 여행_일정_없는_도시_조회() {
         City city1 = createCity("런던", "영국의 수도");
 
         City city2 = createCity("서울", "대한민국의 수도");
-        City city3 = createCity("워싱턴", "미국의 수도");
+        createCity("워싱턴", "미국의 수도");
+
         for (int i = 0; i < 5; i++) {
             TripCreateRequestDto tripCreateRequestDto = TripCreateRequestDto.builder()
                     .tripName("친구와 여행")
