@@ -2,6 +2,10 @@
 
 트리플 과제2 도시 조회 API based on Spring Boot, JPA Hibernate ORM with MySQL, QueryDSL, Spring REST DOCS
 
+안녕하세요 백엔드 개발자 지원자 송인철입니다.
+
+기간 : 2021.09.13 ~ 2021.09.19
+
 ## Requirements & Environment
 1. Java - OpenJDK 11.x.x
 2. Spring - 2.4.x
