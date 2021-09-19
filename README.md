@@ -13,9 +13,11 @@
 
 ## Installations
 
-**1. Repository 클론**
+**1. Repository 클론 & 프로젝트 폴더로 이동**
 ```bash
 git clone https://github.com/inchori/Triple_assignment
+
+cd Triple_assignment
 ```
 
 **2. MySQL DB 생성**
@@ -24,7 +26,7 @@ create database city_travel
 ```
 
 **3. Database username과 password 설정**
-+ `src/main/resources/application.yml` 파일 생성
++ `src/main/resources/application.yml` 파일 설정
 ```
 spring:
   datasource:
@@ -47,10 +49,12 @@ spring:
 **4. 빌드 & 실행**
 ```bash
 ./gradlew build
+
 cd build/libs
+
 java -jar assignment-0.0.1-SNAPSHOT.jar
 ```
 
 ## REST API DOCS 보기
-REST API 문서를 보고 싶으면 http://localhost:8080/docs/index.html 에서 확인할 수 있습니다.
-Postman이나 다른 클라이언트를 통해 테스트해볼 수 있습니다.
+- REST API 문서를 보고 싶으면 http://localhost:8080/docs/index.html 에서 확인할 수 있습니다.
+- Postman이나 다른 클라이언트를 통해 테스트해볼 수 있습니다.
