@@ -9,13 +9,14 @@
 문의 사항 : sic61695@gmail.com
 
 ## Requirements & Environment
-1. Java - OpenJDK 11.x.x
+1. Java - OpenJDK 11.0.x
 2. Spring - 2.4.x
 3. Gradle - 6.9.x
-4. MySQL - 8.0.xx
+4. MySQL - 8.0.x
 5. ORM - JPA Hibernate
-6. OS - MacOS 10.15.x
-7. IDE - IntelliJ IDEA
+6. Test - JUnit5
+7. OS - MacOS 10.15.x
+8. IDE - IntelliJ IDEA
 
 ## Installations
 
