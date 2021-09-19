@@ -6,6 +6,8 @@
 
 기간 : 2021.09.13 ~ 2021.09.19
 
+문의 사항 : sic61695@gmail.com
+
 ## Requirements & Environment
 1. Java - OpenJDK 11.x.x
 2. Spring - 2.4.x
@@ -62,3 +64,5 @@ java -jar assignment-0.0.1-SNAPSHOT.jar
 ## REST API DOCS 보기
 - REST API 문서를 보고 싶으면 http://localhost:8080/docs/index.html 에서 확인할 수 있습니다.
 - Postman이나 다른 클라이언트를 통해 테스트해볼 수 있습니다.
+
+<img width="100%" alt="REST DOCS" src="https://user-images.githubusercontent.com/49394875/133917801-4a1e19fa-7dd9-4826-a7db-84763cc44e76.png">
